@@ -1,1 +1,1 @@
-# colorizr
+# Color Razor
