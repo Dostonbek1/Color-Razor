@@ -3,6 +3,9 @@
 **Current App**
 ![alt text](pic.png)
 
+**Face and Eye Detection Demo**
+![Face and Eye Detection](face_eye_detect.gif)
+
 ## To Run the App
 - Either download or clone this repo.
 - Run `Color-Razor.py` 
