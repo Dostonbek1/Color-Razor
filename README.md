@@ -1,9 +1,9 @@
 # Color Razor
 
 **Current App**
-![alt text](pic.png)
+![Current App Pic](pic.png)
 
-**Face and Eye Detection Demo**
+## Face and Eye Detection Demo
 ![Face and Eye Detection](face_eye_detect.gif)
 
 ## To Run the App
