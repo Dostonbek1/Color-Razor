@@ -4,7 +4,8 @@ import cv2
 import tkinter.filedialog as filer
 from PIL import Image, ImageTk
 
-class Colorize:
+class ColorRazor:
+    
     def __init__(self):
         self.file = ''
         self.grayImg = ''
@@ -80,31 +81,20 @@ class Colorize:
 
     def showImg(self):
         img = cv2.imread(self.file)
-        # cv2.namedWindow("Original Image",cv2.WINDOW_NORMAL)
-        # cv2.imshow("Original Image",img)
-        print("showing")
         self.imageDisplay(img)
 
     def imageDisplay(self, image):
-        print("displaying")
-        #Rearrang the color channel
         b,g,r = cv2.split(image)
         img = cv2.merge((r,g,b))
 
-        # Convert the Image object into a TkPhoto object
         im = Image.fromarray(img)
         im = im.resize((650, 500))
         imgtk = ImageTk.PhotoImage(image=im) 
 
-        # Put it in the display window
         self.imgLabel.pack_forget()
         self.imgLabel = Label(self.ImgFrame, image=imgtk, height=500, width=650)
         self.imgLabel.photo = imgtk
         self.imgLabel.pack()
-        # self.imgLabel.pack(side=LEFT)
-        # imgPanel.pack()
-        # imgLabel.place(x=0, y=0)
-        # self.imgLabel.place(x=0, y=0)
 
     def gray(self):
         color = cv2.imread(self.file, 1)
@@ -136,8 +126,6 @@ class Colorize:
         image = cv2.imread(self.file, 1)
         kernel = np.ones((5, 5), 'uint8')
         self.dilateImg = cv2.dilate(image, kernel, iterations=1)
-        # cv2.namedWindow("Dilate", cv2.WINDOW_NORMAL)
-        # cv2.imshow("Dilate",self.dilateImg)
         self.imageDisplay(self.dilateImg)
 
         dilateSave = Button(root, text="Save", command=test.dilateSave, height=1, width=7, bg='green', fg='white', font=20)
@@ -151,8 +139,6 @@ class Colorize:
         image = cv2.imread(self.file, 1)
         kernel = np.ones((5, 5), 'uint8')
         self.erodeImg = cv2.erode(image,kernel,iterations=1)
-        # cv2.namedWindow("Erode", cv2.WINDOW_NORMAL)
-        # cv2.imshow("Erode",self.erodeImg)
         self.imageDisplay(self.erodeImg)
 
         erodeSave = Button(root, text="Save", command=test.erodeSave, height=1, width=7, bg='green', fg='white', font=20)
@@ -172,7 +158,7 @@ class Colorize:
         ret, min_sat = cv2.threshold(s,40,255, cv2.THRESH_BINARY)
         ret, max_hue = cv2.threshold(h,15,255, cv2.THRESH_BINARY_INV)
         self.skinDetectImg = cv2.bitwise_and(min_sat,max_hue)
-        cv2.imshow("images/Skin Detection", self.skinDetectImg)
+        cv2.imshow("Skin Detection", self.skinDetectImg)
         # self.imageDisplay(self.skinDetectImg)
 
         skinDetectSave = Button(root, text="Save", command=self.skinDetectSave, height=1, width=7, bg='green', fg='white', font=20)
@@ -292,7 +278,7 @@ def main():
     root.configure(background='white')
     root.title("Color Razor")
 
-    test = Colorize()
+    test = ColorRazor()
     test.buildUI(root)
 
     root.mainloop()
